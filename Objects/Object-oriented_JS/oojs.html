@@ -13,14 +13,38 @@
 </body>
 
 <script>
-    function Person(name) {
-        this.name = name;
-        this.greeting = function () {
-            alert('Hi! I\'m ' + this.name + '.');
+    function Person(first, last, age, gender, interests) {
+        this.name = {
+            first,
+            last
         };
-    }
-    var person1 = new Person('Bob');
-    var person2 = new Person('Sarah');
+        this.age = age;
+        this.gender = gender;
+        this.interests = interests;
+        this.bio = function () {
+            if (this.gender === 'male') {
+                var address = 'He'
+            } else {
+                var address = 'She'
+            }
+            var interestsString = ''
+            for (let index = 0; index < this.interests.length; index++) {
+                var interest = this.interests[index];
+                if (index === this.interests.length - 1) {
+                    interestsString += interest + '.';
+                } else {
+                    interestsString += interest + 'and ';
+                }
+
+            }
+            alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. ' + address +
+                ' likes ' + interestsString);
+        };
+        this.greeting = function () {
+            alert('Hi! I\'m ' + this.name.first + '.');
+        };
+    };
+    var person1 = new Person('Bob', 'Smith', 32, 'male', ['music', 'skiing']);
 </script>
 
 </html>
