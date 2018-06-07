@@ -9,4 +9,5 @@ function bgChange() {
     document.body.style.backgroundColor = rndCol;
 }
 
-btn.onmouseover = bgChange
+btn.addEventListener('click', bgChange);
+btn.removeEventListener('click', bgChange);
