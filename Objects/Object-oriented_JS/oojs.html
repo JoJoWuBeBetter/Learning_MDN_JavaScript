@@ -26,7 +26,7 @@
                 var address = 'He'
             } else {
                 var address = 'She'
-            }
+            };
             var interestsString = ''
             for (let index = 0; index < this.interests.length; index++) {
                 var interest = this.interests[index];
@@ -34,9 +34,9 @@
                     interestsString += interest + '.';
                 } else {
                     interestsString += interest + 'and ';
-                }
+                };
 
-            }
+            };
             alert(this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. ' + address +
                 ' likes ' + interestsString);
         };
