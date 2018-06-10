@@ -31,6 +31,62 @@ function EvilCircle(x, y, exists) {
     this.velY = 20;
 }
 
+EvilCircle.prototype.draw = function () {
+    ctx.beginPath();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+    ctx.stroke();
+};
+
+EvilCircle.prototype.update = function () {
+    if ((this.x + this.size) >= width) {
+        this.x = this.x - this.size;
+    }
+
+    if ((this.x - this.size) <= 0) {
+        this.x = this.x + this.size;
+    }
+
+    if ((this.y + this.size) >= height) {
+        this.y = this.y - this.size;
+    }
+
+    if ((this.y - this.size) <= 0) {
+        this.y = this.y + this.size;
+    }
+
+};
+
+EvilCircle.prototype.setControls = function () {
+    var _this = this;
+    window.onkeydown = function (e) {
+        if (e.keyCode === 65) {
+            _this.x -= _this.velX;
+        } else if (e.keyCode === 68) {
+            _this.x += _this.velX;
+        } else if (e.keyCode === 87) {
+            _this.y -= _this.velY;
+        } else if (e.keyCode === 83) {
+            _this.y += _this.velY;
+        }
+    }
+}
+
+EvilCircle.prototype.collisionDetect = function () {
+    for (var j = 0; j < balls.length; j++) {
+        if (!(balls[j].exists)) {
+            var dx = this.x - balls[j].x;
+            var dy = this.y - balls[j].y;
+            var distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < this.size + balls[j].size) {
+                balls[j].color = this.color = 'rgba(0,0,0,0)';
+                balls[j].exists = True;
+            }
+        }
+    }
+};
 
 
 function Ball(x, y, velX, velY, color, size, exists) {
