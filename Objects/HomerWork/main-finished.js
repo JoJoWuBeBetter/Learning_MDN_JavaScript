@@ -23,6 +23,16 @@ function Shape(x, y, velX, velY, exists) {
 
 // define Ball constructor
 
+function EvilCircle(x, y, exists) {
+    Shape.call(this, x, y, exists);
+    this.color = 'white';
+    this.size = 10;
+    this.velX = 20;
+    this.velY = 20;
+}
+
+
+
 function Ball(x, y, velX, velY, color, size, exists) {
     Shape.call(this, x, y, velX, velY, color, size, exists);
     this.color = color;
