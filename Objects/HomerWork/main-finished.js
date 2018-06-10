@@ -81,7 +81,7 @@ EvilCircle.prototype.collisionDetect = function () {
             var distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < this.size + balls[j].size) {
-                balls[j].color = this.color = 'rgba(0,0,0,0)';
+                balls[j].color = 'rgba(0,0,0,0)';
                 balls[j].exists = true;
             }
         }
@@ -89,8 +89,8 @@ EvilCircle.prototype.collisionDetect = function () {
 };
 
 
-function Ball(x, y, velX, velY, color, size, exists) {
-    Shape.call(this, x, y, velX, velY, color, size, exists);
+function Ball(x, y, velX, velY, exists, color, size) {
+    Shape.call(this, x, y, velX, velY, exists);
     this.color = color;
     this.size = size;
 }
@@ -165,9 +165,9 @@ function loop() {
             random(0 + size, height - size),
             random(-7, 7),
             random(-7, 7),
+            false,
             'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')',
-            size,
-            false
+            size,   
         );
         balls.push(ball);
     }
