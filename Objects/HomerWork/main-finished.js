@@ -39,7 +39,7 @@ EvilCircle.prototype.draw = function () {
     ctx.stroke();
 };
 
-EvilCircle.prototype.update = function () {
+EvilCircle.prototype.checkBounds = function () {
     if ((this.x + this.size) >= width) {
         this.x = this.x - this.size;
     }
@@ -82,7 +82,7 @@ EvilCircle.prototype.collisionDetect = function () {
 
             if (distance < this.size + balls[j].size) {
                 balls[j].color = this.color = 'rgba(0,0,0,0)';
-                balls[j].exists = True;
+                balls[j].exists = true;
             }
         }
     }
@@ -149,6 +149,9 @@ var balls = [];
 
 // define loop that keeps drawing the scene constantly
 
+var ec = new EvilCircle(random(0 + 10, width - 10), random(0 + 10, height - 10), true)
+ec.setControls()
+
 function loop() {
     ctx.fillStyle = 'rgba(0,0,0,0.25)';
     ctx.fillRect(0, 0, width, height);
@@ -164,17 +167,22 @@ function loop() {
             random(-7, 7),
             'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')',
             size,
-            true
+            false
         );
         balls.push(ball);
     }
 
     for (var i = 0; i < balls.length; i++) {
-        balls[i].draw();
-        balls[i].update();
-        balls[i].collisionDetect();
-    }
+        if (!(balls[i].exists)) {
+            balls[i].draw();
+            balls[i].update();
+            balls[i].collisionDetect();
+        }
+        ec.draw();
+        ec.checkBounds();
+        ec.collisionDetect();
 
+    }
     requestAnimationFrame(loop);
 }
 
