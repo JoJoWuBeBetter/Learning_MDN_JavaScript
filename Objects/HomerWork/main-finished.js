@@ -151,6 +151,7 @@ var balls = [];
 
 var ec = new EvilCircle(random(0 + 10, width - 10), random(0 + 10, height - 10), true)
 ec.setControls()
+var para = document.querySelector('p');
 
 function loop() {
     ctx.fillStyle = 'rgba(0,0,0,0.25)';
@@ -172,8 +173,11 @@ function loop() {
         balls.push(ball);
     }
 
+    var balls_len = 0
+
     for (var i = 0; i < balls.length; i++) {
         if (!(balls[i].exists)) {
+            balls_len++
             balls[i].draw();
             balls[i].update();
             balls[i].collisionDetect();
@@ -182,6 +186,11 @@ function loop() {
         ec.checkBounds();
         ec.collisionDetect();
 
+    }
+    if (balls_len === 0) {
+        para.textContent = 'Game over'
+    } else {
+        para.textContent = 'Ball count: ' + balls_len;
     }
     requestAnimationFrame(loop);
 }
