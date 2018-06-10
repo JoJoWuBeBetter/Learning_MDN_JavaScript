@@ -104,6 +104,16 @@
             this.name.last + ', and I teach ' + this.subject + '.');
     };
     var teacher1 = new Teacher('Dave', 'Griffiths', 31, 'male', ['football', 'cookery'], 'mathematics');
+
+    function Student(first, last, age, gender, interests, subject) {
+        Person.call(this, first, last, age, gender, interests, subject);
+    };
+    Student.prototype = Object.create(Person.prototype);
+    Student.prototype.constructor = Student;
+    Student.prototype.greeting = function () {
+        alert("Yo! I'm " + this.name.first);
+    };
+ var student1 = new Student('Dave', 'Griffiths', 31, 'male', ['football', 'cookery']);
 </script>
 
 </html>
